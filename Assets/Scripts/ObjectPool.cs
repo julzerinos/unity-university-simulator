@@ -3,35 +3,36 @@ using UnityEngine;
 
 public class ObjectPool<T> where T : MonoBehaviour
 {
-    List<T> Pool = new List<T>();
-    T Prefab;
+    private readonly List<T> _pool = new List<T>();
+    private readonly T _prefab;
 
-    public ObjectPool(int counter, T prefab)
+    public ObjectPool(int counter, T prefab, Transform parent)
     {
-        Prefab = prefab;
-        for (int i = 0; i < counter; i++)
+        _prefab = prefab;
+        for (var i = 0; i < counter; i++)
         {
-            AddObjectToPool(prefab);
+            AddObjectToPool(prefab, parent);
         }
     }
 
     public T GetObject()
     {
-        foreach (var prefab in Pool)
+        foreach (var prefab in _pool)
         {
             if (!prefab.gameObject.activeSelf)
             {
                 return prefab;
             }
         }
-        return AddObjectToPool(Prefab);
+
+        return AddObjectToPool(_prefab, _pool[0].transform.parent);
     }
 
-    private T AddObjectToPool(T prefab)
+    private T AddObjectToPool(T prefab, Transform parent)
     {
-        var inst = GameObject.Instantiate(prefab);
+        var inst = Object.Instantiate(prefab, parent);
         inst.gameObject.SetActive(false);
-        Pool.Add(inst);
+        _pool.Add(inst);
         return inst;
     }
 }

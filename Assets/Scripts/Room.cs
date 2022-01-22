@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Room : MonoBehaviour
 {
-    int DoorsCount;
+    private int _doorsCount;
     public List<Transform> DoorLocations { get; private set; } = new List<Transform>();
 
     private void Awake()
@@ -17,9 +17,9 @@ public class Room : MonoBehaviour
     }
 
 
-    public void Init(int DoorsCount)
+    public void Init(int doorsCount)
     {
-        this.DoorsCount = DoorsCount;
+        this._doorsCount = doorsCount;
 
 
 

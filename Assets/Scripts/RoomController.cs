@@ -5,63 +5,50 @@ using UnityEngine;
 public class RoomController : MonoBehaviour
 {
     public Room prefab;
-    private Graph Graph;
+
+    private Graph _graph;
+
     //private List<Room> Rooms = new List<Room>();
-    private ObjectPool<Room> RoomObjectPool;
-    private Room CurrentPlayerRoom;
+    private ObjectPool<Room> _roomObjectPool;
+    private Room _currentPlayerRoom;
 
     private void Awake()
     {
-        int roomCount = 3;
-        RoomObjectPool = new ObjectPool<Room>(roomCount, prefab);
-        Graph = GraphFactory.circularGraph(roomCount);
+        var roomCount = 3;
+        _roomObjectPool = new ObjectPool<Room>(roomCount, prefab, transform);
+        _graph = GraphFactory.CircularGraph(roomCount);
 
-        var vertex = Graph.Root;
-        int neighboursCount = Graph.Root.GetNeightourCount();
+        var vertex = _graph.Root;
+        var neighboursCount = _graph.Root.GetNeightourCount();
 
-        CurrentPlayerRoom = createRoom(Vector3.zero);
-        createRoomNeighbours(CurrentPlayerRoom);
-
+        _currentPlayerRoom = CreateRoom(Vector3.zero);
+        CreateRoomNeighbours(_currentPlayerRoom);
     }
 
-    void Start()
+    private Room CreateRoom(Vector3 position)
     {
+        var newRoom = _roomObjectPool.GetObject();
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    //private void setRoom(Room room, Room relativeRoom)
-    //{
-
-    //}
-
-    private Room createRoom(Vector3 position)
-    {
-        var newRoom = RoomObjectPool.GetObject();
         newRoom.transform.position = position;
         newRoom.gameObject.SetActive(true);
-        return newRoom;
 
+        return newRoom;
     }
 
-    private void disposeRoom(Room room)
+    private void DisposeRoom(Room room)
     {
         room.gameObject.SetActive(false);
     }
 
-    private void createRoomNeighbours(Room room)
+    private void CreateRoomNeighbours(Room room)
     {
-        foreach (Transform doorLocation in room.DoorLocations)
+        foreach (var doorLocation in room.DoorLocations)
         {
-            var direction = room.transform.position - doorLocation.position;
-            var roomCenter = direction.normalized * Mathf.Abs(Vector3.Dot(direction.normalized, room.GetComponent<Collider>().bounds.extents));
-            createRoom(roomCenter + doorLocation.position);
+            var position = doorLocation.position;
+            var direction = position - room.transform.position;
+            var roomCenter = direction.normalized *
+                             Mathf.Abs(Vector3.Dot(direction.normalized, room.GetComponent<Collider>().bounds.extents));
+            CreateRoom(roomCenter + position);
         }
     }
-
 }

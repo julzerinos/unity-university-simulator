@@ -10,25 +10,25 @@ public class GraphFactory
 
     static public Graph GenerateGraph(int nodes)
     {
-        Random rand = new Random();
+        var rand = new Random();
 
 
         var vertices = new Graph.Vertex[nodes];
-        for (int i = 0; i < nodes; i++)
+        for (var i = 0; i < nodes; i++)
         {
             vertices[i] = new Graph.Vertex();
         }
 
-        Graph graph = new Graph(vertices[0]);
+        var graph = new Graph(vertices[0]);
 
-        for (int i = 0; i < nodes; i++)
+        for (var i = 0; i < nodes; i++)
         {
             var vertex = vertices[i];
             var maxNeighboursToAdd = 4 - vertex.GetNeightourCount();
             if (maxNeighboursToAdd > 0)
             {
                 // add neighbours
-                int neighboursToAdd = rand.Next(2, maxNeighboursToAdd);
+                var neighboursToAdd = rand.Next(2, maxNeighboursToAdd);
                 vertex.Neighbours.AddRange(Array.FindAll(vertices, e => e.GetNeightourCount() < 4).Take(neighboursToAdd));
             }
 
@@ -37,16 +37,16 @@ public class GraphFactory
     }
 
 
-    static public Graph circularGraph(int nodes)
+    static public Graph CircularGraph(int nodes)
     {
         var vertices = new Graph.Vertex[nodes];
-        for (int i = 0; i < nodes; i++)
+        for (var i = 0; i < nodes; i++)
         {
             vertices[i] = new Graph.Vertex();
         }
-        Graph graph = new Graph(vertices[0]);
+        var graph = new Graph(vertices[0]);
 
-        for (int i = 0; i < nodes - 1; i++)
+        for (var i = 0; i < nodes - 1; i++)
         {
             vertices[i].AddNeighbour(vertices[i + 1]);
         }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class Graph
 {
 
-    public Graph(Vertex Root) => this.Root = Root;
+    public Graph(Vertex root) => this.Root = root;
 
     public Vertex Root { get; private set; }
 
