@@ -7,7 +7,7 @@ public class Graph
 
     public Graph(Vertex Root) => this.Root = Root;
 
-    private Vertex Root { get; set; }
+    public Vertex Root { get; private set; }
 
     public class Vertex
     {

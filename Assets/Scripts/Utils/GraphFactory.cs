@@ -12,6 +12,7 @@ public class GraphFactory
     {
         Random rand = new Random();
 
+
         var vertices = new Graph.Vertex[nodes];
         for (int i = 0; i < nodes; i++)
         {
@@ -27,11 +28,32 @@ public class GraphFactory
             if (maxNeighboursToAdd > 0)
             {
                 // add neighbours
-                int neighboursToAdd = rand.Next(1, maxNeighboursToAdd);
+                int neighboursToAdd = rand.Next(2, maxNeighboursToAdd);
                 vertex.Neighbours.AddRange(Array.FindAll(vertices, e => e.GetNeightourCount() < 4).Take(neighboursToAdd));
             }
 
         }
         return graph;
     }
+
+
+    static public Graph circularGraph(int nodes)
+    {
+        var vertices = new Graph.Vertex[nodes];
+        for (int i = 0; i < nodes; i++)
+        {
+            vertices[i] = new Graph.Vertex();
+        }
+        Graph graph = new Graph(vertices[0]);
+
+        for (int i = 0; i < nodes - 1; i++)
+        {
+            vertices[i].AddNeighbour(vertices[i + 1]);
+        }
+        vertices[nodes - 1].AddNeighbour(vertices[0]);
+        return graph;
+    }
+
+
+
 }
