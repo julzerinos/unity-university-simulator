@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
         staminaBarUI.fillMethod = Image.FillMethod.Horizontal;
         staminaBarUI.fillAmount = 1;
         // Lock cursor
+        
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,8 @@ using UnityEngine;
 
 public class Room : MonoBehaviour
 {
+    public event Action<Room> RoomChanged;
+    
     private int _doorsCount;
     public List<Transform> DoorLocations { get; private set; } = new List<Transform>();
 
@@ -19,10 +22,15 @@ public class Room : MonoBehaviour
 
     public void Init(int doorsCount)
     {
-        this._doorsCount = doorsCount;
+        _doorsCount = doorsCount;
+    }
 
-
-
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.CompareTag("Player"))
+            return;
+        
+        RoomChanged?.Invoke(this);
     }
 }
 
