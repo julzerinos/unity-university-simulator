@@ -2,14 +2,18 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Utils;
 
 
 public class Room : MonoBehaviour
 {
     public event Action<Room> RoomChanged;
-    
+
     private int _doorsCount;
-    public List<Transform> DoorLocations { get; private set; } = new List<Transform>();
+    public List<Transform> DoorLocations { get; } = new List<Transform>();
+
+    public List<Room> Neighbours { get; } = new List<Room>();
+
 
     private void Awake()
     {
@@ -29,9 +33,10 @@ public class Room : MonoBehaviour
     {
         if (!other.CompareTag("Player"))
             return;
-        
+
         RoomChanged?.Invoke(this);
     }
+
 }
 
 //public class PipeRoom: Room
