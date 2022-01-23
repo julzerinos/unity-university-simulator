@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(CharacterController))]
-
 public class PlayerController : MonoBehaviour
 {
     public Image staminaBarUI;
@@ -24,13 +23,18 @@ public class PlayerController : MonoBehaviour
     private bool wasRunning = false;
     private bool rechargeStaminaCorutineRunning = true;
 
+    private Camera _playerCamera;
 
     CharacterController characterController;
     Vector3 moveDirection = Vector3.zero;
     float rotationX = 0;
 
-    [HideInInspector]
-    public bool canMove = true;
+    [HideInInspector] public bool canMove = true;
+
+    private void Awake()
+    {
+        _playerCamera = Camera.main;
+    }
 
     void Start()
     {
@@ -39,7 +43,7 @@ public class PlayerController : MonoBehaviour
         staminaBarUI.fillMethod = Image.FillMethod.Horizontal;
         staminaBarUI.fillAmount = 1;
         // Lock cursor
-        
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -54,8 +58,12 @@ public class PlayerController : MonoBehaviour
 
         reduceStamina(isRunning, wasRunning);
 
-        float curSpeedX = canMove ? (isRunning && hasStamina() ? runningSpeed : walkingSpeed) * Input.GetAxis("Vertical") : 0;
-        float curSpeedY = canMove ? (isRunning && hasStamina() ? runningSpeed : walkingSpeed) * Input.GetAxis("Horizontal") : 0;
+        float curSpeedX = canMove
+            ? (isRunning && hasStamina() ? runningSpeed : walkingSpeed) * Input.GetAxis("Vertical")
+            : 0;
+        float curSpeedY = canMove
+            ? (isRunning && hasStamina() ? runningSpeed : walkingSpeed) * Input.GetAxis("Horizontal")
+            : 0;
         float movementDirectionY = moveDirection.y;
         moveDirection = (forward * curSpeedX) + (right * curSpeedY);
 
@@ -89,11 +97,41 @@ public class PlayerController : MonoBehaviour
         }
 
         wasRunning = isRunning;
+
+        DoorsLogic();
+        
+        _lastPosition = _playerCamera.transform.rotation.eulerAngles.y;
+    }
+
+    private float _lastPosition;
+    private bool _shouldReset;
+
+    private void DoorsLogic()
+    {
+        if (!Input.GetMouseButton(0))
+        {
+            _shouldReset = true;
+            return;
+        }
+
+        if (_shouldReset)
+        {
+            _lastPosition = _playerCamera.transform.rotation.eulerAngles.y;
+            _shouldReset = false;
+            return;
+        }
+
+        if (!Physics.Raycast(_playerCamera.transform.position, _playerCamera.transform.forward, out var hit,
+            10f)) return;
+
+        if (!hit.transform.CompareTag("Doot")) return;
+
+        var diff = _playerCamera.transform.rotation.eulerAngles.y - _lastPosition;
+        hit.transform.Rotate(Vector3.up, diff, Space.World);
     }
 
     private void reduceStamina(bool isRunning, bool wasRunning)
     {
-
         if (isRunning && wasRunning && staminaSeconds > 0)
         {
             // stop recharging if running
@@ -134,6 +172,7 @@ public class PlayerController : MonoBehaviour
                 staminaSeconds = maxStaminaSeconds;
             }
         }
+
         rechargeStaminaCorutineRunning = false;
     }
 
@@ -144,5 +183,4 @@ public class PlayerController : MonoBehaviour
         staminaSeconds += amount;
         staminaBarUI.fillAmount = staminaSeconds / maxStaminaSeconds;
     }
-
 }
