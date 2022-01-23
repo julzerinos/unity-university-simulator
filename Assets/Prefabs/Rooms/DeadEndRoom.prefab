@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8541391216338779740}
   - component: {fileID: 1166683981092790072}
   - component: {fileID: 9001429144287752322}
+  - component: {fileID: 4195098115312005543}
   m_Layer: 0
   m_Name: Wall base.003
   m_TagString: Untagged
@@ -81,6 +82,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &4195098115312005543
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27368465634779007}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6155510762231196340, guid: 5e028e5e754c4684f9f6059c28bc0790, type: 3}
 --- !u!1 &2749347581432421697
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,6 +107,7 @@ GameObject:
   - component: {fileID: 7156241136367476184}
   - component: {fileID: 8728736660759436131}
   - component: {fileID: 2680876809574851863}
+  - component: {fileID: 4307720681025715949}
   m_Layer: 0
   m_Name: Wall base.002
   m_TagString: Untagged
@@ -162,6 +178,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &4307720681025715949
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2749347581432421697}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6337386534451255480, guid: 5e028e5e754c4684f9f6059c28bc0790, type: 3}
 --- !u!1 &4598584125013000321
 GameObject:
   m_ObjectHideFlags: 0
@@ -505,6 +535,7 @@ GameObject:
   - component: {fileID: 8446434729760131015}
   - component: {fileID: 1969549514184168808}
   - component: {fileID: 7211812858417189352}
+  - component: {fileID: 2166108017816968263}
   m_Layer: 0
   m_Name: Wall base.001
   m_TagString: Untagged
@@ -575,3 +606,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &2166108017816968263
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8056994808309010721}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6155510762231196340, guid: 5e028e5e754c4684f9f6059c28bc0790, type: 3}

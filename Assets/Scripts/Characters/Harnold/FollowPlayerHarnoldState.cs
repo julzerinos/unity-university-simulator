@@ -11,7 +11,7 @@ namespace Characters.Harnold
 
         private Vector3 _lastDirection = Vector3.zero;
 
-        private float checkDistance = 4f;
+        private float checkDistance = 1f;
 
         public override void FixedUpdate()
         {
