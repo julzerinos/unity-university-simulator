@@ -47,13 +47,16 @@ namespace Utils
             }
 
             var graph = new Graph<Room>(vertices[0]);
+            vertices[0].Neighbours.Add(vertices[1]);
 
-            for (var i = 0; i < nodes - 1; i++)
+            for (var i = 1; i < nodes - 1; i++)
             {
                 vertices[i].Neighbours.Add(vertices[i + 1]);
+                vertices[i+1].Neighbours.Add(vertices[i]);
             }
 
-            vertices[nodes - 1].Neighbours.Add(vertices[0]);
+            vertices[nodes - 1].Neighbours.Add(vertices[1]);
+            vertices[1].Neighbours.Add(vertices[nodes-1]);
             return graph;
         }
     }

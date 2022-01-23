@@ -21,6 +21,7 @@ public class ObjectPool<T> where T : MonoBehaviour
         {
             if (!prefab.gameObject.activeSelf)
             {
+                prefab.gameObject.SetActive(true);
                 return prefab;
             }
         }

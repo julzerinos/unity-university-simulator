@@ -1,15 +1,15 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Utils;
 
 
 public class Room : MonoBehaviour
 {
     public event Action<Room> RoomChanged;
 
-    private int _doorsCount;
+    // private int id;
+    //private int _doorsCount;
+    //public bool NeighboursSpawned { get; set; }
     public List<Transform> DoorLocations { get; } = new List<Transform>();
 
     public List<Room> Neighbours { get; } = new List<Room>();
@@ -23,12 +23,6 @@ public class Room : MonoBehaviour
         }
     }
 
-
-    public void Init(int doorsCount)
-    {
-        _doorsCount = doorsCount;
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player"))
@@ -36,7 +30,6 @@ public class Room : MonoBehaviour
 
         RoomChanged?.Invoke(this);
     }
-
 }
 
 //public class PipeRoom: Room
@@ -50,11 +43,6 @@ public class Room : MonoBehaviour
 //}
 
 //public class TeeRoom: Room
-//{
-
-//}
-
-//public class IntersectionRoom: Room
 //{
 
 //}
