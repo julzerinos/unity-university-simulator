@@ -29,6 +29,7 @@ namespace Rooms
 
         private void Update()
         {
+            return;
             if (!Input.GetMouseButton(0))
             {
                 _shouldReset = true;
