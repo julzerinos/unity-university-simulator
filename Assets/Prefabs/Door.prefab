@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 7150467816950776499}
   - component: {fileID: 7150467816950776500}
   - component: {fileID: 7150467816950776501}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door panel
   m_TagString: Doot
   m_Icon: {fileID: 0}
