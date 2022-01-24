@@ -4,13 +4,13 @@ namespace Characters.Harnold
 {
     public abstract class HarnoldState
     {
-        protected Transform _playerTransform;
-        protected HarnoldController _controller;
+        protected Transform PlayerTransform;
+        protected HarnoldController Controller;
         
         public HarnoldState(Transform playerTransform, HarnoldController controller)
         {
-            _playerTransform = playerTransform;
-            _controller = controller;
+            PlayerTransform = playerTransform;
+            Controller = controller;
         }
         
         public virtual void OnStateStart()
