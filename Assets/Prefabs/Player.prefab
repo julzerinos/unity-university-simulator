@@ -689,7 +689,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 3dd5c10a2b78c234e83c6cd6be3182a0, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -806,3 +806,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97d5989e580339742bfd27f1952928c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  footstepSounds:
+  - {fileID: 8300000, guid: 3dd5c10a2b78c234e83c6cd6be3182a0, type: 3}
+  - {fileID: 8300000, guid: 17ca87eeba5f5d74e92396ef082617ff, type: 3}
+  - {fileID: 8300000, guid: ab5d87cca4531f74cad4bbfc8c496e43, type: 3}

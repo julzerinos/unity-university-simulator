@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class Walking : MonoBehaviour
 {
+    public AudioClip[] footstepSounds;
+
+    private int _currentFootstepSound;
     private AudioSource _walkingSource;
 
     private Animator _cameraAnimator;
@@ -22,7 +25,7 @@ public class Walking : MonoBehaviour
     {
         _cameraAnimator.SetBool(IsMoving, false);
     }
-    
+
     public void Run(bool isRunning)
     {
         _cameraAnimator.speed = isRunning ? 1.4f : 1f;
@@ -33,9 +36,13 @@ public class Walking : MonoBehaviour
     //     _cameraAnimator.Rebind();
     //     _cameraAnimator.Update(0f);
     // }
-    
+
     public void PlayStepSound()
     {
+        _currentFootstepSound = (_currentFootstepSound + Random.Range(0, footstepSounds.Length)) %
+                                footstepSounds.Length;
+
+        _walkingSource.clip = footstepSounds[_currentFootstepSound];
         _walkingSource.Play();
     }
 }
