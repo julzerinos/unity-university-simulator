@@ -23,7 +23,10 @@ namespace Characters.Harnold
 
         private void Update()
         {
-            _currentState.Update();
+            var state = _currentState.Update();
+
+            if (state != _currentState)
+                SetState(state);
         }
 
         private void FixedUpdate()
@@ -34,12 +37,6 @@ namespace Characters.Harnold
         public void MoveForward()
         {
             transform.Translate(.04f * transform.forward, Space.World);
-        }
-        
-        public void CalculateWeights()
-        {
-            MoveForward();
-            transform.LookAt(_playerTransform, Vector3.up);
         }
     }
 }

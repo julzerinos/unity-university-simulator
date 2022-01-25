@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Rooms;
+using UnityEngine;
 using Utils;
 
 namespace Characters.Harnold
@@ -16,9 +17,19 @@ namespace Characters.Harnold
 
         private readonly float _checkDistance = 1f;
 
+        public override HarnoldState Update()
+        {
+            if (Physics.Raycast(
+                Controller.transform.position, Controller.transform.forward, out var hit,
+                2f, _mask) && hit.collider.CompareTag("Doot"))
+                hit.collider.GetComponent<Door>().Open(Controller.transform.forward);
+
+            return this;
+        }
+
         private void DirectionalCheck(ref Vector3 updateDirection, Vector3 direction, Vector3 counter)
         {
-            Debug.DrawRay(Controller.transform.position, direction, Color.blue, 0f, false);
+            // Debug.DrawRay(Controller.transform.position, direction, Color.blue, 0f, false);
 
             if (Physics.Raycast(Controller.transform.position, direction, out var check, _checkDistance, ~_mask))
                 updateDirection += (_checkDistance - check.distance) * counter;

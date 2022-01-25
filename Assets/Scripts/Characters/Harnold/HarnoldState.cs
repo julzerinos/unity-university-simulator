@@ -6,13 +6,13 @@ namespace Characters.Harnold
     {
         protected Transform PlayerTransform;
         protected HarnoldController Controller;
-        
+
         public HarnoldState(Transform playerTransform, HarnoldController controller)
         {
             PlayerTransform = playerTransform;
             Controller = controller;
         }
-        
+
         public virtual void OnStateStart()
         {
         }
@@ -21,8 +21,9 @@ namespace Characters.Harnold
         {
         }
 
-        public virtual void Update()
+        public virtual HarnoldState Update()
         {
+            return new DoNothingHarnoldState(PlayerTransform, Controller);
         }
 
         public virtual void FixedUpdate()
