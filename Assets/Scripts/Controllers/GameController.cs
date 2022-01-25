@@ -10,10 +10,9 @@ namespace Controllers
     {
         public Ects ectsPrefab;
 
-        // Start is called before the first frame update
         private Transform _rooms;
         private int _ectsCollected = 0;
-        private Random _random = new Random();
+        private readonly Random _random = new Random();
         private Ects _ects;
         private Transform _player;
         private Text _ectsText;
@@ -28,16 +27,6 @@ namespace Controllers
             _collectAudioSource = GetComponent<AudioSource>();
             SpawnEctsInRandomRoom();
         }
-
-        void Start()
-        {
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        }
-
         private void SpawnEctsInRandomRoom()
         {
             var pos = _rooms.GetChild(RandomRoomIndex()).position;
