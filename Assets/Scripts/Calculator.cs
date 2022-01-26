@@ -7,7 +7,8 @@ public class Calculator : MonoBehaviour
     public Material screenZero;
 
     private MeshRenderer _screenRenderer;
-    public Vector3 EctsPosition { get; set; } = Vector3.zero;
+
+    public Vector3 EctsPosition { get; set; }
 
     private void OnEnable()
     {
