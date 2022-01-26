@@ -1,13 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour
+namespace Controllers
 {
-    public void StartGame()
+    public class MainMenu : MonoBehaviour
     {
-        Debug.Log("Click");
-        SceneManager.LoadScene("StaticLevel");
+        public void StartGame()
+        {
+            Debug.Log("Click");
+            SceneManager.LoadScene("StaticLevel");
+        }
     }
 }

@@ -1,39 +1,40 @@
-using System;
 using UnityEngine;
-using Utils;
 
-public class Calculator : MonoBehaviour
+namespace Objects
 {
-    public Material screenOne;
-    public Material screenZero;
-
-    private MeshRenderer _screenRenderer;
-
-    public Vector3 EctsPosition { get; set; }
-
-    private void OnEnable()
+    public class Calculator : MonoBehaviour
     {
-        _screenRenderer = transform.Find("model").Find("Screen Quad").GetComponent<MeshRenderer>();
-    }
+        public Material screenOne;
+        public Material screenZero;
 
-    private bool _isScreenOne = false;
+        private MeshRenderer _screenRenderer;
 
-    private void Update()
-    {
-        var dotProduct = Vector3.Dot(
-            (EctsPosition - transform.position).normalized,
-            -transform.forward
-        );
+        public Vector3 EctsPosition { get; set; }
 
-        if (dotProduct > 0.7f && dotProduct < 1f && !_isScreenOne)
+        private void OnEnable()
         {
-            _screenRenderer.material = screenOne;
-            _isScreenOne = true;
+            _screenRenderer = transform.Find("model").Find("Screen Quad").GetComponent<MeshRenderer>();
         }
-        else if (dotProduct < 0.7f && _screenRenderer.material != screenZero && _isScreenOne)
+
+        private bool _isScreenOne = false;
+
+        private void Update()
         {
-            _screenRenderer.material = screenZero;
-            _isScreenOne = false;
+            var dotProduct = Vector3.Dot(
+                (EctsPosition - transform.position).normalized,
+                -transform.forward
+            );
+
+            if (dotProduct > 0.7f && dotProduct < 1f && !_isScreenOne)
+            {
+                _screenRenderer.material = screenOne;
+                _isScreenOne = true;
+            }
+            else if (dotProduct < 0.7f && _screenRenderer.material != screenZero && _isScreenOne)
+            {
+                _screenRenderer.material = screenZero;
+                _isScreenOne = false;
+            }
         }
     }
 }

@@ -1,39 +1,42 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPool<T> where T : MonoBehaviour
+namespace Utils
 {
-    private readonly List<T> _pool = new List<T>();
-    private readonly T _prefab;
-
-    public ObjectPool(int counter, T prefab, Transform parent)
+    public class ObjectPool<T> where T : MonoBehaviour
     {
-        _prefab = prefab;
-        for (var i = 0; i < counter; i++)
-        {
-            AddObjectToPool(prefab, parent);
-        }
-    }
+        private readonly List<T> _pool = new List<T>();
+        private readonly T _prefab;
 
-    public T GetObject()
-    {
-        foreach (var prefab in _pool)
+        public ObjectPool(int counter, T prefab, Transform parent)
         {
-            if (!prefab.gameObject.activeSelf)
+            _prefab = prefab;
+            for (var i = 0; i < counter; i++)
             {
-                prefab.gameObject.SetActive(true);
-                return prefab;
+                AddObjectToPool(prefab, parent);
             }
         }
 
-        return AddObjectToPool(_prefab, _pool[0].transform.parent);
-    }
+        public T GetObject()
+        {
+            foreach (var prefab in _pool)
+            {
+                if (!prefab.gameObject.activeSelf)
+                {
+                    prefab.gameObject.SetActive(true);
+                    return prefab;
+                }
+            }
 
-    private T AddObjectToPool(T prefab, Transform parent)
-    {
-        var inst = Object.Instantiate(prefab, parent);
-        inst.gameObject.SetActive(false);
-        _pool.Add(inst);
-        return inst;
+            return AddObjectToPool(_prefab, _pool[0].transform.parent);
+        }
+
+        private T AddObjectToPool(T prefab, Transform parent)
+        {
+            var inst = Object.Instantiate(prefab, parent);
+            inst.gameObject.SetActive(false);
+            _pool.Add(inst);
+            return inst;
+        }
     }
 }
