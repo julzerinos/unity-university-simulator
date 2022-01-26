@@ -53,8 +53,8 @@ namespace Controllers
             int newRandom;
             do
             {
-                newRandom = _random.Next(_rooms.childCount - 1);
-            } while (_usedIdxs.Contains(newRandom));
+                newRandom = _random.Next(_rooms.childCount);
+            } while (_usedIdxs.Contains(newRandom) && _usedIdxs.Count < _rooms.childCount);
 
             _usedIdxs.Add(newRandom);
             return newRandom;
@@ -108,7 +108,7 @@ namespace Controllers
         }
         private void SpawnEctsBehindSpawn()
         {
-            SpawnEctsAtPosition(_rooms.Find("SpawnRoom").position - new Vector3(0,0,8));
+            SpawnEctsAtPosition(_rooms.Find("Spawn Room").position - new Vector3(0,0,8));
         }
     }
 }
