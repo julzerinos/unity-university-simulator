@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.35872698, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -182,6 +182,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 636712940, guid: bbec9ae16085337408571c58285a1ce4, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1756343191, guid: bbec9ae16085337408571c58285a1ce4, type: 3}
       propertyPath: m_UiScaleMode
       value: 0
@@ -264,7 +268,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6704942580847041985, guid: bbec9ae16085337408571c58285a1ce4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbec9ae16085337408571c58285a1ce4, type: 3}
@@ -1825,6 +1829,25 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7756605397389021305, guid: 881e8ee1d5469437aaaa954810ed2bc2, type: 3}
   m_PrefabInstance: {fileID: 1374331791}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1432029475 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6704942580847041985, guid: bbec9ae16085337408571c58285a1ce4, type: 3}
+  m_PrefabInstance: {fileID: 73096495}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1432029476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1432029475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40f2c188789744ebb9ee4f22ed2b760a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  screenOne: {fileID: 2100000, guid: 13773fe137f77462885460c946bffe25, type: 2}
+  screenZero: {fileID: 2100000, guid: ddfac9bbe9cd74fa1a557e3faa8ce967, type: 2}
 --- !u!1001 &1432303898
 PrefabInstance:
   m_ObjectHideFlags: 0
