@@ -40,7 +40,7 @@ namespace Characters.Harnold
             {
                 yield return _distanceCheckWait;
 
-                if ((_lastDistanceCheckPoint - Controller.transform.position).sqrMagnitude >= 16f)
+                if ((_lastDistanceCheckPoint - Controller.transform.position).sqrMagnitude >= 4f)
                 {
                     _lastDistanceCheckPoint = Controller.transform.position;
                     continue;

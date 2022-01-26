@@ -51,8 +51,7 @@ namespace Characters.Harnold
         {
             transform.Translate(.04f * transform.forward, Space.World);
         }
-
-
+        
         private void OnCollisionEnter(Collision collision)
         {
             if (!collision.collider.CompareTag("Player"))
