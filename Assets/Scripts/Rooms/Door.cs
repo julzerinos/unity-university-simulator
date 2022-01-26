@@ -9,6 +9,8 @@ namespace Rooms
     {
         private AudioSource _doorSource;
 
+        private bool _isOpening;
+
         private bool _wasRotated;
 
         private void Awake()
@@ -37,18 +39,21 @@ namespace Rooms
 
         public void Open(Vector3 agentDirection)
         {
+            if (_isOpening) return;
             StartCoroutine(OpenDoor(agentDirection));
         }
 
         private IEnumerator OpenDoor(Vector3 agentDirection)
         {
+            _isOpening = true;
+
             for (float i = 0; i <= 1f; i += .01f)
             {
                 RotateDoor(1, agentDirection);
                 yield return null;
             }
+
+            _isOpening = false;
         }
-        
-        
     }
 }

@@ -10,9 +10,12 @@ namespace Characters.Harnold
 
         private Transform _playerTransform;
 
+        [NonSerialized] public AudioSource harnoldSource;
+        
         private void Start()
         {
             _playerTransform = FindObjectOfType<PlayerController>().transform;
+            harnoldSource = GetComponent<AudioSource>();
             SetState(new FollowPlayerHarnoldState(_playerTransform, this));
         }
 
