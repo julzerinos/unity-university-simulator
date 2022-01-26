@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.35872698, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -177,6 +177,18 @@ PrefabInstance:
     - target: {fileID: 1872187352492767074, guid: bbec9ae16085337408571c58285a1ce4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2897245856418714700, guid: bbec9ae16085337408571c58285a1ce4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.92387956
+      objectReference: {fileID: 0}
+    - target: {fileID: 2897245856418714700, guid: bbec9ae16085337408571c58285a1ce4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.38268343
+      objectReference: {fileID: 0}
+    - target: {fileID: 2897245856418714700, guid: bbec9ae16085337408571c58285a1ce4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 45
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbec9ae16085337408571c58285a1ce4, type: 3}
@@ -3332,6 +3344,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2092086138}
     m_Modifications:
+    - target: {fileID: 1500273693730671207, guid: e04f3ea7dbdffcb4dadbfdcb8cb52bbf, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3635161821414159688, guid: e04f3ea7dbdffcb4dadbfdcb8cb52bbf, type: 3}
       propertyPath: m_Name
       value: Harnold
@@ -3339,6 +3355,18 @@ PrefabInstance:
     - target: {fileID: 3635161821414159694, guid: e04f3ea7dbdffcb4dadbfdcb8cb52bbf, type: 3}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3635161821414159694, guid: e04f3ea7dbdffcb4dadbfdcb8cb52bbf, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3635161821414159694, guid: e04f3ea7dbdffcb4dadbfdcb8cb52bbf, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3635161821414159694, guid: e04f3ea7dbdffcb4dadbfdcb8cb52bbf, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 3635161821414159694, guid: e04f3ea7dbdffcb4dadbfdcb8cb52bbf, type: 3}
       propertyPath: m_LocalPosition.x
