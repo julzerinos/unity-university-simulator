@@ -1,4 +1,5 @@
-﻿using Rooms;
+﻿using System.Collections;
+using Rooms;
 using UnityEngine;
 using Utils;
 
@@ -17,8 +18,44 @@ namespace Characters.Harnold
 
         private readonly float _checkDistance = 1f;
 
+        private Vector3 _lastDistanceCheckPoint;
+        private bool _didNotMove;
+        private readonly WaitForSeconds _distanceCheckWait = new WaitForSeconds(10f);
+
+        public override void OnStateStart()
+        {
+            Controller.StartCoroutine(DistanceCheckLoop());
+
+            Controller.EscalateSource.Play();
+        }
+
+        public override void OnStateEnd()
+        {
+            Controller.EscalateSource.Stop();
+        }
+
+        private IEnumerator DistanceCheckLoop()
+        {
+            while (!_didNotMove)
+            {
+                yield return _distanceCheckWait;
+
+                if ((_lastDistanceCheckPoint - Controller.transform.position).sqrMagnitude >= 16f)
+                {
+                    _lastDistanceCheckPoint = Controller.transform.position;
+                    continue;
+                }
+
+                _didNotMove = true;
+                break;
+            }
+        }
+
         public override HarnoldState Update()
         {
+            if (_didNotMove)
+                return new TeleportHarnoldState(PlayerTransform, Controller);
+
             if (Physics.Raycast(
                 Controller.transform.position, Controller.transform.forward, out var hit,
                 2f, _mask) && hit.collider.CompareTag("Doot"))
@@ -29,8 +66,6 @@ namespace Characters.Harnold
 
         private void DirectionalCheck(ref Vector3 updateDirection, Vector3 direction, Vector3 counter)
         {
-            // Debug.DrawRay(Controller.transform.position, direction, Color.blue, 0f, false);
-
             if (Physics.Raycast(Controller.transform.position, direction, out var check, _checkDistance, ~_mask))
                 updateDirection += (_checkDistance - check.distance) * counter;
         }
@@ -68,18 +103,7 @@ namespace Characters.Harnold
 
             var momentum = forward;
 
-            // Debug.DrawLine(position1, position1 + playerDirection,
-            //     Color.magenta, .0f, false);
-            // Debug.DrawLine(position, position + leftPull, Color.red, .0f,
-            //     false);
-            // Debug.DrawLine(position, position + rightPull, Color.green, .0f,
-            //     false);
-
             var weightedDirection = playerDirection + rightPull.ToX0Z() + leftPull.ToX0Z() + momentum.ToX0Z();
-
-            // Debug.DrawLine(position.ToX0Z(), position + weightedDirection,
-            //     Color.black, .0f,
-            //     false);
 
             _lastDirection = Vector3.Lerp(_lastDirection, weightedDirection, .05f);
             Controller.transform.LookAt(position + _lastDirection, Vector3.up);

@@ -9,13 +9,21 @@ namespace Characters.Harnold
         private HarnoldState _currentState = new DoNothingHarnoldState(null, null);
 
         private Transform _playerTransform;
-
-        [NonSerialized] public AudioSource harnoldSource;
+        [NonSerialized] public Rigidbody Rg;
         
+        [NonSerialized] public AudioSource TeleportSource;
+        [NonSerialized] public AudioSource EscalateSource;
+
+        private void Awake()
+        {
+            Rg = GetComponent<Rigidbody>();
+            TeleportSource = transform.Find("Teleport audiosource").GetComponent<AudioSource>();
+            EscalateSource = transform.Find("Escalate audiosource").GetComponent<AudioSource>();
+        }
+
         private void Start()
         {
             _playerTransform = FindObjectOfType<PlayerController>().transform;
-            harnoldSource = GetComponent<AudioSource>();
             SetState(new FollowPlayerHarnoldState(_playerTransform, this));
         }
 
@@ -43,7 +51,7 @@ namespace Characters.Harnold
         {
             transform.Translate(.04f * transform.forward, Space.World);
         }
-        
+
 
         private void OnCollisionEnter(Collision collision)
         {
@@ -51,7 +59,6 @@ namespace Characters.Harnold
                 return;
 
             collision.collider.gameObject.GetComponent<PlayerController>().PassOut();
-
         }
     }
 }

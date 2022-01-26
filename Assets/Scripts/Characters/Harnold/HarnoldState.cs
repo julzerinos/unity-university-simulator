@@ -23,7 +23,7 @@ namespace Characters.Harnold
 
         public virtual HarnoldState Update()
         {
-            return new DoNothingHarnoldState(PlayerTransform, Controller);
+            return this;
         }
 
         public virtual void FixedUpdate()
