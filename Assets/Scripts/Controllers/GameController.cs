@@ -14,7 +14,7 @@ namespace Controllers
         private int _ectsCollected = 0;
         private readonly Random _random = new Random();
         private Ects _ects;
-        private Transform _player;
+        private Calculator _calculator;
         private Text _ectsText;
         private List<int> _usedIdxs = new List<int>();
         private AudioSource _collectAudioSource;
@@ -22,11 +22,14 @@ namespace Controllers
         private void Awake()
         {
             _rooms = transform.Find("Rooms");
-            _player = transform.Find("Player");
-            _ectsText = _player.Find("Canvas").Find("ECTS counter").GetComponent<Text>();
+            var playerTransform = transform.Find("Player");
+            _ectsText = playerTransform.Find("Canvas").Find("ECTS counter").GetComponent<Text>();
+            _calculator = playerTransform.Find("Main Camera").Find("CalculatorRotator").Find("Calculator")
+                .GetComponent<Calculator>();
             _collectAudioSource = GetComponent<AudioSource>();
             SpawnEctsInRandomRoom();
         }
+
         private void SpawnEctsInRandomRoom()
         {
             var pos = _rooms.GetChild(RandomRoomIndex()).position;
@@ -35,6 +38,7 @@ namespace Controllers
             _ects.gameObject.SetActive(true);
             _ects.transform.position = pos;
             _ects.EctsCollected += OnEctsCollectedEvent;
+            _calculator.EctsPosition = _ects.transform.position;
         }
 
         private int RandomRoomIndex()
@@ -44,6 +48,7 @@ namespace Controllers
             {
                 newRandom = _random.Next(_rooms.childCount - 1);
             } while (_usedIdxs.Contains(newRandom));
+
             _usedIdxs.Add(newRandom);
             return newRandom;
         }
