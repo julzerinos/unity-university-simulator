@@ -10,7 +10,7 @@ namespace Characters.Harnold
         {
         }
 
-        private float _secondsLeft = 3f;
+        private float _secondsLeft = 5f;
 
         public override void FixedUpdate()
         {
