@@ -18,6 +18,7 @@ namespace Controllers
         private Text _ectsText;
         private List<int> _usedIdxs = new List<int>();
         private AudioSource _collectAudioSource;
+        private Light _flashlight;
 
         private void Awake()
         {
@@ -27,13 +28,18 @@ namespace Controllers
             _calculator = playerTransform.Find("Main Camera").Find("CalculatorRotator").Find("Calculator")
                 .GetComponent<Calculator>();
             _collectAudioSource = GetComponent<AudioSource>();
-            SpawnEctsInRandomRoom();
+            _flashlight = playerTransform.Find("Main Camera").Find("Spot Light").GetComponent<Light>();
+           SpawnEctsInRandomRoom();
         }
 
         private void SpawnEctsInRandomRoom()
         {
             var pos = _rooms.GetChild(RandomRoomIndex()).position;
-            // pos.y += 1;
+            SpawnEctsAtPosition(pos);
+        }
+
+        private void SpawnEctsAtPosition(Vector3 pos)
+        {
             _ects = Instantiate(ectsPrefab, transform);
             _ects.gameObject.SetActive(true);
             _ects.transform.position = pos;
@@ -56,15 +62,52 @@ namespace Controllers
         private void OnEctsCollectedEvent(Ects ects)
         {
             ects.gameObject.SetActive(false);
-            _collectAudioSource.Play();
-            IncrementEctsCollected();
-            SpawnEctsInRandomRoom();
+            EctsCollectionEffects();
         }
 
+        private void EctsCollectionEffects()
+        {
+            _collectAudioSource.Play();
+            IncrementEctsCollected();
+            switch (_ectsCollected)
+            {
+                case 1:
+                {
+                    RenderSettings.fogDensity = 0.2f;
+                    SpawnEctsInRandomRoom();
+                    break;
+                }
+                case 2:
+                {
+                    RenderSettings.fogDensity = 0.3f;
+                    SpawnEctsInRandomRoom();
+                    _flashlight.intensity = 5;
+                    break;
+                }
+                case 3:
+                {
+                    RenderSettings.fogDensity = 0.35f;
+                    SpawnEctsInRandomRoom();
+                    _flashlight.enabled = false;
+                    break;
+                }
+                case 4:
+                {
+                    // open exit door
+                    SpawnEctsBehindSpawn();
+                    break;
+                }
+            }
+        }
         private void IncrementEctsCollected()
         {
             _ectsCollected += 1;
             _ectsText.text = $"{_ectsCollected} of 4 ECTS collected";
+            
+        }
+        private void SpawnEctsBehindSpawn()
+        {
+            SpawnEctsAtPosition(_rooms.Find("SpawnRoom").position - new Vector3(0,0,8));
         }
     }
 }

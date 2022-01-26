@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Characters.Harnold
@@ -37,6 +38,16 @@ namespace Characters.Harnold
         public void MoveForward()
         {
             transform.Translate(.04f * transform.forward, Space.World);
+        }
+        
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (!collision.collider.CompareTag("Player"))
+                return;
+
+            collision.collider.gameObject.GetComponent<PlayerController>().PassOut();
+
         }
     }
 }
