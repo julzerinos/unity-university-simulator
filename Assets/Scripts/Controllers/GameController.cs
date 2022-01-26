@@ -33,7 +33,7 @@ namespace Controllers
         private void SpawnEctsInRandomRoom()
         {
             var pos = _rooms.GetChild(RandomRoomIndex()).position;
-            pos.y += 1;
+            // pos.y += 1;
             _ects = Instantiate(ectsPrefab, transform);
             _ects.gameObject.SetActive(true);
             _ects.transform.position = pos;
