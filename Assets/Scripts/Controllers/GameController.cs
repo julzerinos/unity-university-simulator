@@ -35,7 +35,6 @@ namespace Controllers
         private void SpawnEctsInRandomRoom()
         {
             var pos = _rooms.GetChild(RandomRoomIndex()).position;
-            pos.y += 1;
             SpawnEctsAtPosition(pos);
         }
 

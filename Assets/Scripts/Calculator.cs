@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Utils;
 
 public class Calculator : MonoBehaviour
 {
@@ -19,7 +20,11 @@ public class Calculator : MonoBehaviour
 
     private void Update()
     {
-        var dotProduct = Vector3.Dot(EctsPosition.normalized, -transform.forward);
+        var dotProduct = Vector3.Dot(
+            (EctsPosition - transform.position).normalized,
+            -transform.forward
+        );
+
         if (dotProduct > 0.7f && dotProduct < 1f && !_isScreenOne)
         {
             _screenRenderer.material = screenOne;
