@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Characters.Harnold;
+using Characters.Player;
 using Objects;
 using Rooms;
 using UnityEngine;
@@ -27,10 +28,13 @@ namespace Controllers
         private Transform _spawnRoom;
         private Entrance _entrance;
 
+        private PlayerController _player;
+
         private void Awake()
         {
             _rooms = transform.Find("Rooms");
             var playerTransform = transform.Find("Player");
+            _player = playerTransform.GetComponent<PlayerController>();
             _ectsText = playerTransform.Find("Canvas").Find("ECTS counter").GetComponent<Text>();
             _calculator = playerTransform.Find("Main Camera").Find("CalculatorRotator").Find("Calculator")
                 .GetComponent<Calculator>();
@@ -107,6 +111,7 @@ namespace Controllers
                     _harnoldController.harnoldSpeed = 0.05f;
                     SpawnEctsInRandomRoom();
                     _flashlight.enabled = false;
+                    _player.ActivateInsanity();
                     break;
                 }
                 case 4:
