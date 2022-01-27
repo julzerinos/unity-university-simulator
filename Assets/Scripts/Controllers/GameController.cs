@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Characters.Harnold;
 using Objects;
 using Rooms;
 using UnityEngine;
@@ -20,6 +21,8 @@ namespace Controllers
         private List<int> _usedIdxs = new List<int>();
         private AudioSource _collectAudioSource;
         private Light _flashlight;
+        private GameObject _harnoldGameObject;
+        private HarnoldController _harnoldController;
 
         private void Awake()
         {
@@ -30,6 +33,9 @@ namespace Controllers
                 .GetComponent<Calculator>();
             _collectAudioSource = GetComponent<AudioSource>();
             _flashlight = playerTransform.Find("Main Camera").Find("Spot Light").GetComponent<Light>();
+            _harnoldGameObject = transform.Find("Harnold").gameObject;
+            _harnoldGameObject.SetActive(false);
+            _harnoldController = _harnoldGameObject.GetComponent<HarnoldController>();
            SpawnEctsInRandomRoom();
         }
 
@@ -74,13 +80,16 @@ namespace Controllers
             {
                 case 1:
                 {
-                    RenderSettings.fogDensity = 0.2f;
+                    _harnoldGameObject.SetActive(true);
+                    _harnoldController.harnoldSpeed = 0.02f;
+                    RenderSettings.fogDensity = 0.03f;
                     SpawnEctsInRandomRoom();
                     break;
                 }
                 case 2:
                 {
                     RenderSettings.fogDensity = 0.3f;
+                    _harnoldController.harnoldSpeed = 0.04f;
                     SpawnEctsInRandomRoom();
                     _flashlight.intensity = 5;
                     break;
@@ -88,13 +97,15 @@ namespace Controllers
                 case 3:
                 {
                     RenderSettings.fogDensity = 0.35f;
+                    _harnoldController.harnoldSpeed = 0.05f;
                     SpawnEctsInRandomRoom();
                     _flashlight.enabled = false;
                     break;
                 }
                 case 4:
                 {
-                    // open exit door
+                    //todo: open exit door
+                    _harnoldController.harnoldSpeed = 0.06f;
                     SpawnEctsBehindSpawn();
                     break;
                 }

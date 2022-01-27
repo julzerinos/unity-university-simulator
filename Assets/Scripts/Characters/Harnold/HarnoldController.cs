@@ -13,6 +13,7 @@ namespace Characters.Harnold
         
         [NonSerialized] public AudioSource TeleportSource;
         [NonSerialized] public AudioSource EscalateSource;
+        public float harnoldSpeed = 0.04f;
 
         private void Awake()
         {
@@ -49,7 +50,7 @@ namespace Characters.Harnold
 
         public void MoveForward()
         {
-            transform.Translate(.04f * transform.forward, Space.World);
+            transform.Translate(harnoldSpeed * transform.forward, Space.World);
         }
         
         private void OnCollisionEnter(Collision collision)
