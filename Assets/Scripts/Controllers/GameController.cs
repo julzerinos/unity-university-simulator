@@ -116,7 +116,6 @@ namespace Controllers
                 }
                 case 4:
                 {
-                    //todo: open exit door
                     _harnoldController.harnoldSpeed = 0.06f;
                     SpawnEctsBehindSpawn();
                     break;
@@ -132,7 +131,7 @@ namespace Controllers
 
         private void SpawnEctsBehindSpawn()
         {
-            SpawnEctsAtPosition(_spawnRoom.position - new Vector3(0, -10, 8));
+            SpawnEctsAtPosition(_spawnRoom.position - new Vector3(0, -5, -8));
             _entrance.ChangeToFinalState();
         }
     }

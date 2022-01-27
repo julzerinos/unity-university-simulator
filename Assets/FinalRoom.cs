@@ -19,6 +19,8 @@ public class FinalRoom : MonoBehaviour
 
     private void Trigger(PlayerController player)
     {
+        RenderSettings.fogDensity = 0f;
+        
         _finalSource.Play();
         _harnold.SetActive(true);
         _diploma.SetActive(false);
@@ -33,7 +35,7 @@ public class FinalRoom : MonoBehaviour
             harnold.gameObject.SetActive(true);
             yield return new WaitForSeconds(.2f);
         }
-        
+
         player.PassOut();
     }
 
