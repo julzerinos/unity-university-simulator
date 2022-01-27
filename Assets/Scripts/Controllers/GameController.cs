@@ -21,6 +21,9 @@ namespace Controllers
         private AudioSource _collectAudioSource;
         private Light _flashlight;
 
+        private Transform _spawnRoom;
+        private Entrance _entrance;
+
         private void Awake()
         {
             _rooms = transform.Find("Rooms");
@@ -30,7 +33,11 @@ namespace Controllers
                 .GetComponent<Calculator>();
             _collectAudioSource = GetComponent<AudioSource>();
             _flashlight = playerTransform.Find("Main Camera").Find("Spot Light").GetComponent<Light>();
-           SpawnEctsInRandomRoom();
+
+            _spawnRoom = _rooms.Find("Spawn Room");
+            _entrance = _spawnRoom.GetComponentInChildren<Entrance>();
+
+            SpawnEctsInRandomRoom();
         }
 
         private void SpawnEctsInRandomRoom()
@@ -100,15 +107,17 @@ namespace Controllers
                 }
             }
         }
+
         private void IncrementEctsCollected()
         {
             _ectsCollected += 1;
             _ectsText.text = $"{_ectsCollected} of 4 ECTS collected";
-            
         }
+
         private void SpawnEctsBehindSpawn()
         {
-            SpawnEctsAtPosition(_rooms.Find("Spawn Room").position - new Vector3(0,0,8));
+            SpawnEctsAtPosition(_spawnRoom.position - new Vector3(0, -10, 8));
+            _entrance.ChangeToFinalState();
         }
     }
 }
