@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/StaticLevel.unity
     guid: 5b55b3167b9e943feb974692e2cdf1be
+  - enabled: 1
+    path: Assets/Scenes/NewStaticLevel.unity
+    guid: f51cccbb656a248d79740db2654bb232
   m_configObjects: {}

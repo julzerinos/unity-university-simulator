@@ -7,8 +7,7 @@ namespace Controllers
     {
         public void StartGame()
         {
-            Debug.Log("Click");
-            SceneManager.LoadScene("StaticLevel");
+            SceneManager.LoadScene("NewStaticLevel");
         }
     }
 }
