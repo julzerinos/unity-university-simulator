@@ -9,3 +9,7 @@ Made with love, anger and everything in between 🖤
 Play the game on [Itch](https://julzerinos.itch.io/university-simulator)!
 
 ![](https://img.itch.zone/aW1hZ2UvMTM3MDc3Ni83OTgzNDY1LmdpZg==/original/Ck%2FEoa.gif)
+
+#### Licenses
+
+All source code is distributed under the MIT license. Where possible, external resources have their licenses listed.
